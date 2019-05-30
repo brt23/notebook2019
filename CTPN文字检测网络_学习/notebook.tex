@@ -1,0 +1,1367 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{CTPN????}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{ux53c2ux8003ux8d44ux6599}{%
+\section{参考资料}\label{ux53c2ux8003ux8d44ux6599}}
+
+    01: https://cloud.tencent.com/developer/article/1152494
+场景文本检测---CTPN算法介绍\\
+02: https://blog.csdn.net/sinat\_33486980/article/details/81099093
+faster R-CNN中anchors 的生成过程（generate\_anchors源码解析）\\
+03: https://blog.csdn.net/shenxiaolu1984/article/details/51152614
+【目标检测】Faster RCNN算法详解\\
+04: https://zhuanlan.zhihu.com/p/34757009
+场景文字检测---CTPN原理与实现\\
+05: https://www.jianshu.com/p/027e9399e699
+与CPTN（文字识别网络）作斗争的记录\\
+06: https://www.zhihu.com/question/265345106/answer/294410307
+目标检测中region proposal的作用？\\
+07: https://blog.csdn.net/u011436429/article/details/80279536 ROI
+Pooling原理及实现\\
+08: https://zhuanlan.zhihu.com/p/31426458 一文读懂Faster RCNN\\
+09: https://zhuanlan.zhihu.com/p/43534801 一文读懂CRNN+CTC文字识别\\
+10: https://blog.csdn.net/zchang81/article/details/78873347 CTPN -
+自然场景文本检测
+
+    \hypertarget{ux53c2ux8003ux5b9eux73b0}{%
+\section{参考实现}\label{ux53c2ux8003ux5b9eux73b0}}
+
+    01: https://github.com/xiaomaxiao/keras\_ocr xiaomaxiao/keras\_ocr
+
+    \hypertarget{ux8bbaux6587ux5730ux5740}{%
+\section{论文地址}\label{ux8bbaux6587ux5730ux5740}}
+
+    01: https://arxiv.org/abs/1609.03605 Detecting Text in Natural Image
+with Connectionist Text Proposal Network
+
+    \hypertarget{ux573aux666fux6587ux5b57ux68c0ux6d4bctpnux7b14ux8bb0}{%
+\section{场景文字检测---CTPN笔记}\label{ux573aux666fux6587ux5b57ux68c0ux6d4bctpnux7b14ux8bb0}}
+
+    \hypertarget{ctpnux7b80ux4ecb}{%
+\subsection{CTPN简介}\label{ctpnux7b80ux4ecb}}
+
+    对于复杂场景的文字识别，首先要定位文字的位置，即文字检测。这一直是一个研究热点。\\
+CTPN是在ECCV
+2016提出的一种文字检测算法。CTPN结合CNN与LSTM深度网络，能有效的检测出复杂场景的横向分布的文字，是目前比较好的文字检测算法。
+
+    \hypertarget{ctpnux7f51ux7edcux7ed3ux6784}{%
+\subsection{CTPN网络结构}\label{ctpnux7f51ux7edcux7ed3ux6784}}
+
+    网络使用keras框架实现
+
+假设输入 N Images：
+
+1: 首先VGG提取特征，获得大小为 NxHxWxC 的 conv5 feature map
+
+2: 之后在conv5上做 3×3 的滑动窗口，即每个点都结合周围 3×3
+区域特征获得一个长度为 3×3×C 的特征向量。输出 NxHxWx9C 的 feature
+map，该特征显然只有CNN学习到的空间特征
+
+3: 再将这个feature map进行Reshape, NxHxWx9C -\textgreater{} (NH)xWx9C
+
+4: 然后以 Batch=NH 且最大时间长度 T=W
+的数据流输入双向LSTM，学习每一行的序列特征。双向LSTM输出 (NH)xWx256
+
+5: 再经Reshape恢复形状 (NH)xWx256 -\textgreater{} NxHxWx256
+该特征既包含空间特征，也包含了LSTM学习到的序列特征
+
+6: 然后经过``FC''卷积层，变为 NxHxWx256 的特征, ``FC''卷积层为核为 1x1
+的卷积只会改变 feature map 的厚度
+
+7: 最后经过类似Faster R-CNN的RPN网络，获得text proposals
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{keras}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{layers}\PY{p}{,} \PY{n}{Input}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Model}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{applications}\PY{n+nn}{.}\PY{n+nn}{vgg16} \PY{k}{import} \PY{n}{VGG16}
+        \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{backend} \PY{k}{as} \PY{n}{K}
+        \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using TensorFlow backend.
+
+    \end{Verbatim}
+
+    \hypertarget{ux9aa8ux5e72ux7f51ux7edcux6a21ux5757ux51fdux6570}{%
+\subsubsection{骨干网络模块函数}\label{ux9aa8ux5e72ux7f51ux7edcux6a21ux5757ux51fdux6570}}
+
+骨干网络为VGG16，使用VGG16对图片进行特征提取。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{def} \PY{n+nf}{nn\PYZus{}base}\PY{p}{(}\PY{n}{input\PYZus{}shape}\PY{p}{,} \PY{n}{pretrain\PYZus{}weights\PYZus{}path}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    骨干网络块，使用VGG16底部的卷积层用来对图形进行特征提取}
+        \PY{l+s+sd}{    需要使用预训练模型，请下载vgg16\PYZus{}weights\PYZus{}tf\PYZus{}dim\PYZus{}ordering\PYZus{}tf\PYZus{}kernels\PYZus{}notop.h5}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{base\PYZus{}model} \PY{o}{=} \PY{n}{VGG16}\PY{p}{(}\PY{n}{weights}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{include\PYZus{}top}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{n}{input\PYZus{}shape}\PY{p}{)}
+            \PY{n}{base\PYZus{}model}\PY{o}{.}\PY{n}{load\PYZus{}weights}\PY{p}{(}\PY{n}{pretrain\PYZus{}weights\PYZus{}path}\PY{p}{)}
+            \PY{k}{return} \PY{n}{base\PYZus{}model}\PY{o}{.}\PY{n}{input}\PY{p}{,} \PY{n}{base\PYZus{}model}\PY{o}{.}\PY{n}{get\PYZus{}layer}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{block5\PYZus{}conv3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{output}
+\end{Verbatim}
+
+
+    \hypertarget{reshapeux7279ux5f81ux56feux5230ux4ee5ux5bbdux4e3aux65f6ux95f4ux6b65ux7684ux5f62ux5f0f-nxhxwx9c---nhxwx9c}{%
+\subsubsection{reshape特征图到以宽为时间步的形式 NxHxWx9C
+-\textgreater{}
+(NH)xWx9C}\label{reshapeux7279ux5f81ux56feux5230ux4ee5ux5bbdux4e3aux65f6ux95f4ux6b65ux7684ux5f62ux5f0f-nxhxwx9c---nhxwx9c}}
+
+构建把feature map进行Reshape, NxHxWx9C -\textgreater{} (NH)xWx9C 的函数
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{reshape\PYZus{}to\PYZus{}time\PYZus{}series}\PY{p}{(}\PY{n}{input\PYZus{}tensor}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    把输入tensor NxHxWx9C reshape 到 (NH)xWx9C}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{tshape} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{input\PYZus{}tensor}\PY{p}{)}
+            \PY{n}{output\PYZus{}tensor} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{input\PYZus{}tensor}\PY{p}{,} \PY{p}{[}\PY{n}{tshape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{*}\PY{n}{tshape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{tshape}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{tshape}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+            \PY{k}{return} \PY{n}{output\PYZus{}tensor}
+\end{Verbatim}
+
+
+    \hypertarget{reshapeux7279ux5f81ux56feux5230ux9ad8ux5bbdux901aux9053ux7684ux5f62ux5f0f-nhxwx256---nxhxwx256}{%
+\subsubsection{reshape特征图到高宽通道的形式 (NH)xWx256 -\textgreater{}
+NxHxWx256}\label{reshapeux7279ux5f81ux56feux5230ux9ad8ux5bbdux901aux9053ux7684ux5f62ux5f0f-nhxwx256---nxhxwx256}}
+
+构建Reshape恢复形状 (NH)xWx256 -\textgreater{} NxHxWx256 的函数
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{reshape\PYZus{}to\PYZus{}back}\PY{p}{(}\PY{n}{input\PYZus{}tensor\PYZus{}list}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    把输入blstm\PYZus{}tensor (NH)xWx256 通过rpn\PYZus{}conv\PYZus{}tensor的形状 reshape 到 NxHxWx256}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{blstm}\PY{p}{,} \PY{n}{rpn\PYZus{}conv} \PY{o}{=} \PY{n}{input\PYZus{}tensor\PYZus{}list}
+            \PY{n}{rshape} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{rpn\PYZus{}conv}\PY{p}{)}
+            \PY{n}{output\PYZus{}tensor} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{blstm}\PY{p}{,} \PY{p}{[}\PY{n}{rshape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{rshape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{rshape}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+            \PY{k}{return} \PY{n}{output\PYZus{}tensor}
+\end{Verbatim}
+
+
+    \hypertarget{reshapeux7279ux5f81ux56feux5230prnux7684ux5f62ux5f0f-nxhxwx20---nx10hwx2}{%
+\subsubsection{reshape特征图到PRN的形式 NxHxWx20 -\textgreater{}
+Nx(10HW)x2}\label{reshapeux7279ux5f81ux56feux5230prnux7684ux5f62ux5f0f-nxhxwx20---nx10hwx2}}
+
+构建Reshape到RPN结构 NxHxWx20 -\textgreater{} Nx(10HW)x2 的函数\\
+NxHxWx20 的意思1是已featrue
+map每个像素中心坐标生成10个候选框，每个候选框有预测两个类别(前景、背景)\\
+NxHxWx20 的意思2是已featrue
+map每个像素中心坐标生成10个候选框，每个候选框有回归2个便宜量(基于每个候选框center\_y的偏移量、基于每个候选框h的偏移量)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{reshape\PYZus{}to\PYZus{}rpn}\PY{p}{(}\PY{n}{input\PYZus{}tensor}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    把输入tensor NxHxWx20 reshape 到 Nx(10HW)x2}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{tshape} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{shape}\PY{p}{(}\PY{n}{input\PYZus{}tensor}\PY{p}{)}
+            \PY{n}{output\PYZus{}tensor} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{input\PYZus{}tensor}\PY{p}{,} \PY{p}{[}\PY{n}{tshape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+            \PY{k}{return} \PY{n}{output\PYZus{}tensor}
+\end{Verbatim}
+
+
+    \hypertarget{ux6784ux5efaux5b8cux6574ux7f51ux7edcux7ed3ux6784}{%
+\subsubsection{构建完整网络结构}\label{ux6784ux5efaux5b8cux6574ux7f51ux7edcux7ed3ux6784}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{cptn\PYZus{}model}\PY{p}{(}\PY{n}{input\PYZus{}shape}\PY{p}{,} \PY{n}{pretrain\PYZus{}weights\PYZus{}path}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} 输入(None, None, 3) 输出(None/16， None/16, 3) 通过骨干网络进行特征提取 向下取整}
+            \PY{n}{input\PYZus{}tensor}\PY{p}{,} \PY{n}{vgg\PYZus{}tensor} \PY{o}{=} \PY{n}{nn\PYZus{}base}\PY{p}{(}\PY{n}{input\PYZus{}shape}\PY{p}{,} \PY{n}{pretrain\PYZus{}weights\PYZus{}path}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} 使得每个点都结合周围(3, 3)的区域特征}
+            \PY{c+c1}{\PYZsh{} H*W*C \PYZhy{}\PYZgt{} H*W*9C}
+            \PY{n}{rpn\PYZus{}conv} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{(}
+                \PY{l+m+mi}{512}\PY{o}{*}\PY{l+m+mi}{9}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rpn\PYZus{}conv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{vgg\PYZus{}tensor}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} 此步骤应是对上层网络输出的特征图进行reshape}
+            \PY{c+c1}{\PYZsh{} 使特征图的shape变成(NH)*W*C，以(NH)为批次，W为时间步进行学习}
+            \PY{n}{rpn\PYZus{}conv\PYZus{}reshape} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{Lambda}\PY{p}{(}
+                \PY{n}{reshape\PYZus{}to\PYZus{}time\PYZus{}series}\PY{p}{,} 
+                \PY{n}{output\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{k+kc}{None}\PY{p}{,} \PY{l+m+mi}{512}\PY{o}{*}\PY{l+m+mi}{9}\PY{p}{)}\PY{p}{,}
+                \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reshape2ts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{rpn\PYZus{}conv}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} 此步骤是一个双向LSTM，单个反向输出完整的时间步特征图形状为(NH)*W*128}
+            \PY{c+c1}{\PYZsh{} 有两个方向会各自得到各自的特征图，按通道堆叠两个特征图 最终得到的特征图形状(NH)*W*256}
+            \PY{n}{blstm} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{Bidirectional}\PY{p}{(}
+                \PY{n}{layers}\PY{o}{.}\PY{n}{GRU}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{,} \PY{n}{return\PYZus{}sequences}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{,}
+                \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blstm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{rpn\PYZus{}conv\PYZus{}reshape}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} blstm张量的形状是(NH)*W*256 需要通过rpn\PYZus{}conv的形状来辅助恢复到\PYZhy{}\PYZgt{} N*H*W*256}
+            \PY{c+c1}{\PYZsh{} 以便后面的卷积操作}
+            \PY{n}{blstm\PYZus{}reshape} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{Lambda}\PY{p}{(}
+                \PY{n}{reshape\PYZus{}to\PYZus{}back}\PY{p}{,}
+                \PY{n}{output\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{k+kc}{None}\PY{p}{,} \PY{k+kc}{None}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{)}\PY{p}{,}
+                \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{reshape2back}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{p}{[}\PY{n}{blstm}\PY{p}{,} \PY{n}{rpn\PYZus{}conv}\PY{p}{]}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} 经过“FC”卷积层，变为 N*H*W*512 的特征}
+            \PY{n}{fcnn} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{(}
+                \PY{l+m+mi}{512}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fcnn}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{blstm\PYZus{}reshape}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} 通过卷积提取每个框中是否是前景还是背景的变量}
+            \PY{n}{clas} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{(}
+                \PY{l+m+mi}{10}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rpn\PYZus{}class}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{fcnn}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} 将输出类别预测张量形状改变为N*HW10*2}
+            \PY{n}{clas} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{Lambda}\PY{p}{(}
+                \PY{n}{reshape\PYZus{}to\PYZus{}rpn}\PY{p}{,} \PY{n}{output\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{k+kc}{None}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,}
+                \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rpn\PYZus{}class\PYZus{}reshape}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{clas}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} 通过卷积提取每个框的的中心y坐标和高度两个值，也是每个框2个变量}
+            \PY{n}{regr} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{(}
+                \PY{l+m+mi}{10}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{linear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rpn\PYZus{}regress}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{fcnn}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} 将输出框坐标预测张量形状改变为N*HW10*2}
+            \PY{n}{regr} \PY{o}{=} \PY{n}{layers}\PY{o}{.}\PY{n}{Lambda}\PY{p}{(}
+                \PY{n}{reshape\PYZus{}to\PYZus{}rpn}\PY{p}{,} \PY{n}{output\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{k+kc}{None}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} 
+                \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rpn\PYZus{}regress\PYZus{}reshape}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{regr}\PY{p}{)}
+            
+            \PY{n}{model} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{input\PYZus{}tensor}\PY{p}{,} \PY{p}{[}\PY{n}{clas}\PY{p}{,} \PY{n}{regr}\PY{p}{]}\PY{p}{)}
+            \PY{k}{return} \PY{n}{model}
+        
+        \PY{n}{model} \PY{o}{=} \PY{n}{cptn\PYZus{}model}\PY{p}{(}\PY{p}{(}\PY{k+kc}{None}\PY{p}{,} \PY{k+kc}{None}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vgg16\PYZus{}weights\PYZus{}tf\PYZus{}dim\PYZus{}ordering\PYZus{}tf\PYZus{}kernels\PYZus{}notop.h5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                    Output Shape         Param \#     Connected to                     
+==================================================================================================
+input\_1 (InputLayer)            (None, None, None, 3 0                                            
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block1\_conv1 (Conv2D)           (None, None, None, 6 1792        input\_1[0][0]                    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block1\_conv2 (Conv2D)           (None, None, None, 6 36928       block1\_conv1[0][0]               
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block1\_pool (MaxPooling2D)      (None, None, None, 6 0           block1\_conv2[0][0]               
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block2\_conv1 (Conv2D)           (None, None, None, 1 73856       block1\_pool[0][0]                
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block2\_conv2 (Conv2D)           (None, None, None, 1 147584      block2\_conv1[0][0]               
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block2\_pool (MaxPooling2D)      (None, None, None, 1 0           block2\_conv2[0][0]               
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block3\_conv1 (Conv2D)           (None, None, None, 2 295168      block2\_pool[0][0]                
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block3\_conv2 (Conv2D)           (None, None, None, 2 590080      block3\_conv1[0][0]               
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block3\_conv3 (Conv2D)           (None, None, None, 2 590080      block3\_conv2[0][0]               
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block3\_pool (MaxPooling2D)      (None, None, None, 2 0           block3\_conv3[0][0]               
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block4\_conv1 (Conv2D)           (None, None, None, 5 1180160     block3\_pool[0][0]                
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block4\_conv2 (Conv2D)           (None, None, None, 5 2359808     block4\_conv1[0][0]               
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block4\_conv3 (Conv2D)           (None, None, None, 5 2359808     block4\_conv2[0][0]               
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block4\_pool (MaxPooling2D)      (None, None, None, 5 0           block4\_conv3[0][0]               
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block5\_conv1 (Conv2D)           (None, None, None, 5 2359808     block4\_pool[0][0]                
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block5\_conv2 (Conv2D)           (None, None, None, 5 2359808     block5\_conv1[0][0]               
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+block5\_conv3 (Conv2D)           (None, None, None, 5 2359808     block5\_conv2[0][0]               
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+rpn\_conv (Conv2D)               (None, None, None, 4 21238272    block5\_conv3[0][0]               
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+reshape2ts (Lambda)             (None, None, 4608)   0           rpn\_conv[0][0]                   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+blstm (Bidirectional)           (None, None, 256)    3638016     reshape2ts[0][0]                 
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+reshape2back (Lambda)           (None, None, None, 2 0           blstm[0][0]                      
+                                                                 rpn\_conv[0][0]                   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+fcnn (Conv2D)                   (None, None, None, 5 131584      reshape2back[0][0]               
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+rpn\_class (Conv2D)              (None, None, None, 2 10260       fcnn[0][0]                       
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+rpn\_regress (Conv2D)            (None, None, None, 2 10260       fcnn[0][0]                       
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+rpn\_class\_reshape (Lambda)      (None, None, 2)      0           rpn\_class[0][0]                  
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+rpn\_regress\_reshape (Lambda)    (None, None, 2)      0           rpn\_regress[0][0]                
+==================================================================================================
+Total params: 39,743,080
+Trainable params: 39,743,080
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+    \end{Verbatim}
+
+    \hypertarget{ux635fux5931ux51fdux6570}{%
+\subsection{损失函数}\label{ux635fux5931ux51fdux6570}}
+
+    构建RPN的两个损失函数 对于边框偏移量回归使用 smooth L1 loss
+对于前背景分类使用 crossentropy loss
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{def} \PY{n+nf}{rpn\PYZus{}loss\PYZus{}regr}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    smooth L1 loss}
+        \PY{l+s+sd}{  }
+        \PY{l+s+sd}{    y\PYZus{}ture [1][HXWX10][3] (class1,regr2) }
+        \PY{l+s+sd}{    y\PYZus{}pred [1][HXWX10][2] (reger2)}
+        \PY{l+s+sd}{    class的值为\PYZhy{}1, 0， 1; }
+        \PY{l+s+sd}{    regr的值为Vc, Vh为预测的anchor和IOU最大的gtbox之间center\PYZus{}y和h的偏移量}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{sigma} \PY{o}{=} \PY{l+m+mf}{9.0}
+            \PY{n}{clas} \PY{o}{=} \PY{n}{y\PYZus{}true}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{regr} \PY{o}{=} \PY{n}{y\PYZus{}true}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+            \PY{c+c1}{\PYZsh{} 使用标签的clas类别来选出最合适的anchor的偏移量进行损失函数计算}
+            \PY{n}{regr\PYZus{}keep} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{equal}\PY{p}{(}\PY{n}{clas}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+            \PY{n}{regr\PYZus{}true} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{gather}\PY{p}{(}\PY{n}{regr}\PY{p}{,} \PY{n}{regr\PYZus{}keep}\PY{p}{)}
+            \PY{n}{regr\PYZus{}pred} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{gather}\PY{p}{(}\PY{n}{y\PYZus{}pred}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{regr\PYZus{}keep}\PY{p}{)}
+            \PY{n}{diff} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{regr\PYZus{}true} \PY{o}{\PYZhy{}} \PY{n}{regr\PYZus{}pred}\PY{p}{)}
+            \PY{n}{less\PYZus{}one} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{less}\PY{p}{(}\PY{n}{diff}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{o}{/}\PY{n}{sigma}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float32}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{loss} \PY{o}{=} \PY{n}{less\PYZus{}one} \PY{o}{*} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{diff}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{sigma} \PY{o}{+} \PY{n}{tf}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{less\PYZus{}one}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{diff} \PY{o}{\PYZhy{}} \PY{l+m+mf}{0.5} \PY{o}{/} \PY{n}{sigma}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} 求出每个可能的候选框的loss}
+            \PY{n}{loss} \PY{o}{=} \PY{n}{K}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{loss}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} 如果没有求出loss那么loss置零，有loss的话算出这个样本的候选框loss的均值}
+            \PY{k}{return} \PY{n}{K}\PY{o}{.}\PY{n}{switch}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{n}{loss}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{K}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{loss}\PY{p}{)}\PY{p}{,} \PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{)}\PY{p}{)} 
+        
+        
+        \PY{k}{def} \PY{n+nf}{rpn\PYZus{}loss\PYZus{}clas}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    softmax loss}
+        \PY{l+s+sd}{    }
+        \PY{l+s+sd}{    y\PYZus{}true [1][HXWX10][1] class 不是one\PYZhy{}hot编码}
+        \PY{l+s+sd}{    y\PYZus{}pred [1][HXWX10][2] class }
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}} 
+            \PY{n}{y\PYZus{}true} \PY{o}{=} \PY{n}{y\PYZus{}true}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+            \PY{c+c1}{\PYZsh{} 选出正负样本，过滤掉无关样本，也就是\PYZhy{}1类的框直接忽略了，只留下0类（背景），1类（前景）两类框}
+            \PY{n}{clas\PYZus{}keep} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{not\PYZus{}equal}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} 
+            \PY{n}{clas\PYZus{}true} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{gather}\PY{p}{(}\PY{n}{y\PYZus{}true}\PY{p}{,} \PY{n}{clas\PYZus{}keep}\PY{p}{)}
+            \PY{n}{clas\PYZus{}pred} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{gather}\PY{p}{(}\PY{n}{y\PYZus{}pred}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{clas\PYZus{}keep}\PY{p}{)}
+            \PY{n}{clas\PYZus{}true} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{cast}\PY{p}{(}\PY{n}{clas\PYZus{}true}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int64}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} 求每个标签和对应预测值的交叉熵误差（每个候选框）}
+            \PY{n}{loss} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{sparse\PYZus{}softmax\PYZus{}cross\PYZus{}entropy\PYZus{}with\PYZus{}logits}\PY{p}{(}\PY{n}{labels}\PY{o}{=}\PY{n}{clas\PYZus{}true}\PY{p}{,} \PY{n}{logits}\PY{o}{=}\PY{n}{clas\PYZus{}pred}\PY{p}{)} 
+            \PY{c+c1}{\PYZsh{} 如果没有求出loss那么loss置零，有loss的话算出这个样本的候选框前背景loss的均值}
+            \PY{k}{return} \PY{n}{K}\PY{o}{.}\PY{n}{switch}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{n}{loss}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{K}\PY{o}{.}\PY{n}{clip}\PY{p}{(}\PY{n}{K}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{loss}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{n}{K}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{)}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \hypertarget{rpnux6807ux7b7eux8ba1ux7b97ux5305ux542banchorux8ba1ux7b97}{%
+\subsection{RPN标签计算，包含anchor计算}\label{rpnux6807ux7b7eux8ba1ux7b97ux5305ux542banchorux8ba1ux7b97}}
+
+    计算对应特征图的基础候选框 1.
+因为骨干网络使用的是VGG16，所以骨干网络提取特征后输出的特征图的h,w是原图的16分之1
+2.
+所以特征图一个像素对应原图16x16的区域，候选框就是以这个区域的中心来生成，候选框的坐标是在原图上的
+3. 设定特征图每个像素中心生成10个不同大小的基于原图的候选框 4.
+假设特征图大小为(30, 20)那么候选框个数就是30x20x10
+
+    \hypertarget{ux57faux7840ux5019ux9009ux6846ux751fux6210ux5668}{%
+\subsubsection{基础候选框生成器}\label{ux57faux7840ux5019ux9009ux6846ux751fux6210ux5668}}
+
+基础候选框是通过特征图计算出来的，不是预测出来的
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{gen\PYZus{}anchor}\PY{p}{(}\PY{n}{featuresize}\PY{p}{,} \PY{n}{scale}\PY{p}{)}\PY{p}{:}
+            \PY{c+c1}{\PYZsh{} 每个候选点预测10个候选框，这个是候选框基于原图的高度，有10种不同的高度}
+            \PY{n}{heights} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{11}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{23}\PY{p}{,} \PY{l+m+mi}{33}\PY{p}{,} \PY{l+m+mi}{48}\PY{p}{,} \PY{l+m+mi}{68}\PY{p}{,} \PY{l+m+mi}{97}\PY{p}{,} \PY{l+m+mi}{139}\PY{p}{,} \PY{l+m+mi}{198}\PY{p}{,} \PY{l+m+mi}{283}\PY{p}{]}
+            \PY{c+c1}{\PYZsh{} 每个候选点预测10个候选框，这个是候选框基于原图的宽度，对于文字预测，宽度相等}
+            \PY{n}{widths}  \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,}  \PY{l+m+mi}{16}\PY{p}{,}  \PY{l+m+mi}{16}\PY{p}{,}  \PY{l+m+mi}{16}\PY{p}{]} 
+        
+            \PY{n}{heights} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{heights}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{heights}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} 把数据格式转换为numpy}
+            \PY{n}{widths}  \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{widths}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{widths}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+            
+            \PY{c+c1}{\PYZsh{} 因为使用的是VGG16的特征图，选取的特征图和原图大小关系刚好是16倍，这里是在选取一个基本anchor}
+            \PY{n}{base\PYZus{}anchor} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{]}\PY{p}{)} 
+            \PY{c+c1}{\PYZsh{} 通过基本anchor求出候选框中心坐标}
+            \PY{n}{cx} \PY{o}{=} \PY{p}{(}\PY{n}{base\PYZus{}anchor}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{base\PYZus{}anchor}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{l+m+mf}{2.0} \PY{c+c1}{\PYZsh{} 宽度一半得到x中心坐标}
+            \PY{n}{cy} \PY{o}{=} \PY{p}{(}\PY{n}{base\PYZus{}anchor}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{base\PYZus{}anchor}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{l+m+mf}{2.0} \PY{c+c1}{\PYZsh{} 高度一半得到y中心坐标}
+        
+            \PY{c+c1}{\PYZsh{} 求出在基础候选点的10个候选框坐标}
+            \PY{n}{x1} \PY{o}{=} \PY{n}{cx} \PY{o}{\PYZhy{}} \PY{n}{widths} \PY{o}{/} \PY{l+m+mf}{2.0}
+            \PY{n}{y1} \PY{o}{=} \PY{n}{cy} \PY{o}{\PYZhy{}} \PY{n}{heights} \PY{o}{/} \PY{l+m+mf}{2.0}
+            \PY{n}{x2} \PY{o}{=} \PY{n}{cx} \PY{o}{+} \PY{n}{widths} \PY{o}{/} \PY{l+m+mf}{2.0}
+            \PY{n}{y2} \PY{o}{=} \PY{n}{cy} \PY{o}{+} \PY{n}{heights} \PY{o}{/} \PY{l+m+mf}{2.0}
+            \PY{n}{base\PYZus{}anchor} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{y2}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} shape=(10, 4)}
+        
+            \PY{n}{h}\PY{p}{,} \PY{n}{w} \PY{o}{=} \PY{n}{featuresize}
+            \PY{n}{shift\PYZus{}x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{w}\PY{p}{)} \PY{o}{*} \PY{n}{scale} \PY{c+c1}{\PYZsh{} 基于特征图生成候选点网格}
+            \PY{n}{shift\PYZus{}y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{h}\PY{p}{)} \PY{o}{*} \PY{n}{scale}
+            
+            \PY{c+c1}{\PYZsh{} 通过基本anchor和基于特征图的候选点网格，生成整个特征图的anchor}
+            \PY{n}{anchor} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{shift\PYZus{}y}\PY{p}{:}
+                \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{shift\PYZus{}x}\PY{p}{:}
+                    \PY{n}{anchor}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{base\PYZus{}anchor} \PY{o}{+} \PY{p}{[}\PY{n}{j}\PY{p}{,} \PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{,} \PY{n}{i}\PY{p}{]}\PY{p}{)}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{anchor}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} shape=(anchor\PYZus{}num, 4)}
+\end{Verbatim}
+
+
+    \hypertarget{ux4ea4ux5e76ux6bd4ux8ba1ux7b97ux76f8ux5173ux51fdux6570}{%
+\subsubsection{交并比计算相关函数}\label{ux4ea4ux5e76ux6bd4ux8ba1ux7b97ux76f8ux5173ux51fdux6570}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{cal\PYZus{}iou}\PY{p}{(}\PY{n}{box1}\PY{p}{,} \PY{n}{box1\PYZus{}area}\PY{p}{,} \PY{n}{boxes2}\PY{p}{,} \PY{n}{boxes2\PYZus{}area}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    计算交并比 相交的面积和相并的面积的比值}
+        
+        \PY{l+s+sd}{    box1 [x1,y1,x2,y2]            每个anchor}
+        \PY{l+s+sd}{    boxes2 [Msample,x1,y1,x2,y2]  所有的gtbox}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{x1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{box1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{boxes2}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} 找出两个框靠左的横坐标的最大的那个 shape=(M,)}
+            \PY{n}{x2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{minimum}\PY{p}{(}\PY{n}{box1}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{boxes2}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} 找出两个框靠右的横坐标的最小的那个 shape=(M,)}
+            \PY{n}{y1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{box1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{boxes2}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} 找出两个框靠上的纵坐标中最大的那个 shape=(M,)}
+            \PY{n}{y2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{minimum}\PY{p}{(}\PY{n}{box1}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{boxes2}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} 找出两个框靠下的纵坐标中最小的那个 shape=(M,)}
+        
+            \PY{n}{intersection} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{x2} \PY{o}{\PYZhy{}} \PY{n}{x1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{y2} \PY{o}{\PYZhy{}} \PY{n}{y1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{} 如果x2\PYZhy{}x1为负数或者y2\PYZhy{}y1为负数，那么两个框是不相交的 shape=(M,)}
+            \PY{n}{iou} \PY{o}{=} \PY{n}{intersection} \PY{o}{/} \PY{p}{(}\PY{n}{box1\PYZus{}area} \PY{o}{+} \PY{n}{boxes2\PYZus{}area} \PY{o}{\PYZhy{}} \PY{n}{intersection}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 相交的面积和相并的面积的比值 shape=(M,)}
+            \PY{k}{return} \PY{n}{iou}
+        
+        
+        \PY{k}{def} \PY{n+nf}{cal\PYZus{}overlaps}\PY{p}{(}\PY{n}{boxes1}\PY{p}{,} \PY{n}{boxes2}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+sd}{    计算出每个anchor分别和所有的gtbox的iou}
+        
+        \PY{l+s+sd}{    boxes1 [Nsample,x1,y1,x2,y2]  anchor      shape=(N, 4)}
+        \PY{l+s+sd}{    boxes2 [Msample,x1,y1,x2,y2]  grouth\PYZhy{}box  shape=(M, 4)}
+        \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+            \PY{n}{area1} \PY{o}{=} \PY{p}{(}\PY{n}{boxes1}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{boxes1}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{boxes1}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{boxes1}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} shape=(N,)}
+            \PY{n}{area2} \PY{o}{=} \PY{p}{(}\PY{n}{boxes2}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{boxes2}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{boxes2}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{boxes2}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} shape=(M,)}
+        
+            \PY{n}{overlaps} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{boxes1}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{boxes2}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} shape=(N, M)}
+        
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{boxes1}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                \PY{n}{overlaps}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{n}{cal\PYZus{}iou}\PY{p}{(}\PY{n}{boxes1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{area1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{boxes2}\PY{p}{,} \PY{n}{area2}\PY{p}{)} \PY{c+c1}{\PYZsh{} cal\PYZus{}iou返回的shape=(M,) overlaps[i][:]的shape=(M,) 一次计算当前anchor和所有gtbox的iou}
+        
+            \PY{k}{return} \PY{n}{overlaps} \PY{c+c1}{\PYZsh{} shape=(N, M)}
+\end{Verbatim}
+
+
+    \hypertarget{ux628aux6846ux7684x1-y1-x2-y2ux5750ux6807ux8f6cux6362ux4e3avc-vhux504fux79fbux91cf}{%
+\subsubsection{把框的(x1, y1, x2, y2)坐标转换为(Vc，
+Vh)偏移量}\label{ux628aux6846ux7684x1-y1-x2-y2ux5750ux6807ux8f6cux6362ux4e3avc-vhux504fux79fbux91cf}}
+
+通过候选框和真实框计算出候选框需要怎么移动放大才能变成真实框，及反向计算\\
+计算Vc为y坐标偏移量，Vh为框高度偏移量
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{bbox\PYZus{}transfrom}\PY{p}{(}\PY{n}{anchors}\PY{p}{,} \PY{n}{gtboxes}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    通过候选框和真实框计算出候选框需要怎么移动放大才能变成真实框}
+         \PY{l+s+sd}{    计算Vc为y坐标偏移量，Vh为框高度偏移量}
+         \PY{l+s+sd}{    anchors shape=(N, 4)}
+         \PY{l+s+sd}{    gtboxes shape=(N, 4) 此时的gtboes是有anchor个，是每个anchor对应iou最大的那个gtbox}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{cy}  \PY{o}{=} \PY{p}{(}\PY{n}{gtboxes}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{gtboxes}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{l+m+mf}{2.0} \PY{c+c1}{\PYZsh{} shape=(N,)}
+             \PY{n}{cya} \PY{o}{=} \PY{p}{(}\PY{n}{anchors}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{anchors}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{l+m+mf}{2.0} \PY{c+c1}{\PYZsh{} shape=(N,)}
+             \PY{n}{h}   \PY{o}{=} \PY{n}{gtboxes}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{gtboxes}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{l+m+mf}{1.0} \PY{c+c1}{\PYZsh{} shape=(N,)}
+             \PY{n}{ha}  \PY{o}{=} \PY{n}{anchors}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{anchors}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{l+m+mf}{1.0} \PY{c+c1}{\PYZsh{} shape=(N,)}
+         
+             \PY{n}{vc} \PY{o}{=} \PY{p}{(}\PY{n}{cy} \PY{o}{\PYZhy{}} \PY{n}{cya}\PY{p}{)} \PY{o}{/} \PY{n}{ha} \PY{c+c1}{\PYZsh{} shape=(N,)}
+             \PY{n}{vh} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{h} \PY{o}{/} \PY{n}{ha}\PY{p}{)}  \PY{c+c1}{\PYZsh{} shape=(N,)}
+             
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{[}\PY{n}{vc}\PY{p}{,} \PY{n}{vh}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} shape=(2, N) transpose \PYZhy{}\PYZgt{} shape=(N, 2)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{bbox\PYZus{}transfrom\PYZus{}inv}\PY{p}{(}\PY{n}{anchor}\PY{p}{,} \PY{n}{regr}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    通过基础anchor和预测出的偏移量，计算出预测出的bbox坐标}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{cya} \PY{o}{=} \PY{p}{(}\PY{n}{anchor}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{anchor}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{l+m+mf}{2.0}
+             \PY{n}{ha}  \PY{o}{=} \PY{p}{(}\PY{n}{anchor}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{anchor}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}
+         
+             \PY{n}{vc\PYZus{}pred} \PY{o}{=} \PY{n}{regr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{vh\PYZus{}pred} \PY{o}{=} \PY{n}{regr}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         
+             \PY{n}{cy\PYZus{}pred} \PY{o}{=} \PY{n}{vc\PYZus{}pred} \PY{o}{*} \PY{n}{ha} \PY{o}{+} \PY{n}{cya}
+             \PY{n}{h\PYZus{}pred}  \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{vh\PYZus{}pred}\PY{p}{)} \PY{o}{*} \PY{n}{ha}
+         
+             \PY{n}{cxa} \PY{o}{=} \PY{p}{(}\PY{n}{anchor}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{anchor}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{l+m+mf}{2.0}
+         
+             \PY{n}{x1} \PY{o}{=} \PY{n}{cxa} \PY{o}{\PYZhy{}} \PY{l+m+mi}{16} \PY{o}{/} \PY{l+m+mf}{2.0}
+             \PY{n}{y1} \PY{o}{=} \PY{n}{cy\PYZus{}pred} \PY{o}{\PYZhy{}} \PY{n}{h\PYZus{}pred} \PY{o}{/} \PY{l+m+mf}{2.0}
+             \PY{n}{x2} \PY{o}{=} \PY{n}{cxa} \PY{o}{+} \PY{l+m+mi}{16} \PY{o}{/} \PY{l+m+mf}{2.0}
+             \PY{n}{y2} \PY{o}{=} \PY{n}{cy\PYZus{}pred} \PY{o}{+} \PY{n}{h\PYZus{}pred} \PY{o}{/} \PY{l+m+mf}{2.0}
+             \PY{n}{bbox} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{vstack}\PY{p}{(}\PY{p}{[}\PY{n}{x1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{y2}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{p}{)}
+         
+             \PY{k}{return} \PY{n}{bbox}
+\end{Verbatim}
+
+
+    \hypertarget{ux8ba1ux7b97prnux7f51ux7edcux7684anchorux6807ux7b7e}{%
+\subsubsection{计算PRN网络的anchor标签}\label{ux8ba1ux7b97prnux7f51ux7edcux7684anchorux6807ux7b7e}}
+
+这个函数就是通过真实框和基础候选框计算出哪些候选框是前景哪些候选框是背景\\
+这个就是rpn的核心
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{cal\PYZus{}rpn}\PY{p}{(}\PY{n}{imgsize}\PY{p}{,} \PY{n}{featuresize}\PY{p}{,} \PY{n}{scale}\PY{p}{,} \PY{n}{gtboxes}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    计算anchor标签和anchor与gtbox的偏移量}
+         \PY{l+s+sd}{    就是制作RPN网络的标签}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{imgh}\PY{p}{,} \PY{n}{imgw} \PY{o}{=} \PY{n}{imgsize}
+         
+             \PY{n}{base\PYZus{}anchor} \PY{o}{=} \PY{n}{gen\PYZus{}anchor}\PY{p}{(}\PY{n}{featuresize}\PY{p}{,} \PY{n}{scale}\PY{p}{)} \PY{c+c1}{\PYZsh{} shape=(N, 4)}
+         
+             \PY{n}{overlaps} \PY{o}{=} \PY{n}{cal\PYZus{}overlaps}\PY{p}{(}\PY{n}{base\PYZus{}anchor}\PY{p}{,} \PY{n}{gtboxes}\PY{p}{)} \PY{c+c1}{\PYZsh{} shape=(N, M)}
+         
+             \PY{n}{labels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{base\PYZus{}anchor}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} shape=(N,)}
+             \PY{n}{labels}\PY{o}{.}\PY{n}{fill}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} \PYZhy{}1为忽略标签}
+         
+             \PY{n}{gt\PYZus{}argmax\PYZus{}overlaps} \PY{o}{=} \PY{n}{overlaps}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)} \PY{c+c1}{\PYZsh{} shape=(M,)}
+         
+             \PY{n}{anchor\PYZus{}argmax\PYZus{}overlaps} \PY{o}{=} \PY{n}{overlaps}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} shape=(N,)}
+             \PY{c+c1}{\PYZsh{} 这里使用了numpy的坐标找值法，按shape的顺序输入坐标组，range(overlaps.shape[0])是选横坐标，anchor\PYZus{}argmax\PYZus{}overlaps选纵坐标}
+             \PY{n}{anchor\PYZus{}max\PYZus{}overlaps} \PY{o}{=} \PY{n}{overlaps}\PY{p}{[}\PY{n+nb}{range}\PY{p}{(}\PY{n}{overlaps}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{anchor\PYZus{}argmax\PYZus{}overlaps}\PY{p}{]} \PY{c+c1}{\PYZsh{} shape=(N,)}
+             
+             \PY{n}{labels}\PY{p}{[}\PY{n}{anchor\PYZus{}max\PYZus{}overlaps} \PY{o}{\PYZgt{}} \PY{n}{IOU\PYZus{}POSITIVE}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} 给交并比大于阈值的anchor标签设置为1（前景）}
+             \PY{n}{labels}\PY{p}{[}\PY{n}{anchor\PYZus{}max\PYZus{}overlaps} \PY{o}{\PYZlt{}} \PY{n}{IOU\PYZus{}NEGATIVE}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0} \PY{c+c1}{\PYZsh{} 给交并比小于与之的anchor标签设置为0（背景）}
+             \PY{n}{labels}\PY{p}{[}\PY{n}{gt\PYZus{}argmax\PYZus{}overlaps}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} 各个gtbox交并比最大的anchor标签设置为1（前景），以保证每个gtbox至少有一个对应的anchor}
+         
+             \PY{n}{outside\PYZus{}anchor} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}
+                 \PY{p}{(}\PY{n}{base\PYZus{}anchor}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{|}
+                 \PY{p}{(}\PY{n}{base\PYZus{}anchor}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{)} \PY{o}{|}
+                 \PY{p}{(}\PY{n}{base\PYZus{}anchor}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{imgw}\PY{p}{)} \PY{o}{|}
+                 \PY{p}{(}\PY{n}{base\PYZus{}anchor}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{imgh}\PY{p}{)}
+                 \PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{labels}\PY{p}{[}\PY{n}{outside\PYZus{}anchor}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} 把超出图片的anchor设置为忽略标签}
+         
+             \PY{c+c1}{\PYZsh{} 抑制样本数量}
+             \PY{c+c1}{\PYZsh{} 抑制正样本数量}
+             \PY{n}{fg\PYZus{}index} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{labels} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{} 前景标签的下标}
+             \PY{k}{if}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{fg\PYZus{}index}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{n}{RPN\PYZus{}POSITIVE\PYZus{}NUM}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} 如果选出的前景标签的数量大于设定默认前景标签数量，那么随机选出多余的部分设置值为\PYZhy{}1}
+                 \PY{n}{labels}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{fg\PYZus{}index}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{fg\PYZus{}index}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{RPN\PYZus{}POSITIVE\PYZus{}NUM}\PY{p}{,} \PY{n}{replace}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+         
+             \PY{c+c1}{\PYZsh{} 抑制负样本数量}
+             \PY{n}{bg\PYZus{}index} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{labels}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{c+c1}{\PYZsh{} 背景标签的下标}
+             \PY{n}{num\PYZus{}bg} \PY{o}{=} \PY{n}{RPN\PYZus{}TOTAL\PYZus{}NUM} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{labels} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} 通过总有效候选框数量减去正数量得到应该有的背景数量}
+             \PY{k}{if}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{bg\PYZus{}index}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{n}{num\PYZus{}bg}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{labels}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{bg\PYZus{}index}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{bg\PYZus{}index}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{num\PYZus{}bg}\PY{p}{,} \PY{n}{replace}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{c+c1}{\PYZsh{} 随机选择超出的背景标签设置为\PYZhy{}1}
+         
+             \PY{c+c1}{\PYZsh{} 把anchor坐标标签转换为Vc和Vh标签}
+             \PY{n}{bbox\PYZus{}targets} \PY{o}{=} \PY{n}{bbox\PYZus{}transfrom}\PY{p}{(}\PY{n}{base\PYZus{}anchor}\PY{p}{,} \PY{n}{gtboxes}\PY{p}{[}\PY{n}{anchor\PYZus{}argmax\PYZus{}overlaps}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)} 
+             \PY{c+c1}{\PYZsh{} gtboxes[anchor\PYZus{}argmax\PYZus{}overlaps,:]是找出对应anchor的IOU最大的gtbox}
+         
+             \PY{k}{return} \PY{p}{[}\PY{n}{labels}\PY{p}{,} \PY{n}{bbox\PYZus{}targets}\PY{p}{]}\PY{p}{,} \PY{n}{base\PYZus{}anchor}
+\end{Verbatim}
+
+
+    \hypertarget{ux8badux7ec3ux6570ux636eux751fux6210ux5668}{%
+\subsection{训练数据生成器}\label{ux8badux7ec3ux6570ux636eux751fux6210ux5668}}
+
+    \hypertarget{ux5207ux5206ux539fux59cbux7684gtbox}{%
+\subsubsection{切分原始的gtbox}\label{ux5207ux5206ux539fux59cbux7684gtbox}}
+
+因为CTPN的候选框是宽度固定的小框，也不会预测宽度和x坐标\\
+所以需要先把真实框切分成等宽的小框以便计算rpn标签
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{def} \PY{n+nf}{split\PYZus{}gtboxes}\PY{p}{(}\PY{n}{gtboxes}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    把标签原始的大框，转换为宽度16像素的小框，以便后面计算anchor}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{new\PYZus{}gtboxes} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{gtbox} \PY{o+ow}{in} \PY{n}{gtboxes}\PY{p}{:}
+                 \PY{n}{x1} \PY{o}{=} \PY{n}{gtbox}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                 \PY{n}{y1} \PY{o}{=} \PY{n}{gtbox}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+                 \PY{n}{x2} \PY{o}{=} \PY{n}{gtbox}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+                 \PY{n}{y2} \PY{o}{=} \PY{n}{gtbox}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+                 \PY{n}{gtbox\PYZus{}w} \PY{o}{=} \PY{n}{x2} \PY{o}{\PYZhy{}} \PY{n}{x1}
+                 \PY{n}{w\PYZus{}steps} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n}{gtbox\PYZus{}w} \PY{o}{/} \PY{l+m+mi}{16}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{w\PYZus{}steps}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{new\PYZus{}gtboxes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{n}{y1}\PY{p}{,} \PY{n}{x1}\PY{o}{+}\PY{l+m+mi}{16}\PY{p}{,} \PY{n}{y2}\PY{p}{)}\PY{p}{)}
+                     \PY{n}{x1} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{16}
+             
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{new\PYZus{}gtboxes}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{gtboxux8bfbux53d6ux5668}{%
+\subsubsection{gtbox读取器}\label{gtboxux8bfbux53d6ux5668}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k}{def} \PY{n+nf}{readtxt}\PY{p}{(}\PY{n}{path}\PY{p}{)}\PY{p}{:}
+             \PY{n}{gtboxes} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{imgfile} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{splitext}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{path}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.jpg}\PY{l+s+s1}{\PYZsq{}}
+             \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n}{path}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{f}\PY{p}{:}
+                     \PY{n}{line} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{sub}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{n]}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{line}\PY{p}{)}
+                     \PY{n}{line} \PY{o}{=} \PY{n}{re}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{s}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{line}\PY{p}{)}
+                     \PY{n}{gtboxes}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{line}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{line}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{line}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{line}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{gtboxes}\PY{p}{)}\PY{p}{,} \PY{n}{imgfile}
+\end{Verbatim}
+
+
+    \hypertarget{dataloaderux51fdux6570}{%
+\subsubsection{dataloader函数}\label{dataloaderux51fdux6570}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k}{def} \PY{n+nf}{gen\PYZus{}sample}\PY{p}{(}\PY{n}{textdir}\PY{p}{,} \PY{n}{imgdir}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    训练数据生成器}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{textfiles} \PY{o}{=} \PY{p}{[}\PY{n}{file} \PY{k}{for} \PY{n}{file} \PY{o+ow}{in} \PY{n}{os}\PY{o}{.}\PY{n}{listdir}\PY{p}{(}\PY{n}{textdir}\PY{p}{)} \PY{k}{if} \PY{n}{file}\PY{o}{.}\PY{n}{endswith}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}
+             \PY{n}{random}\PY{o}{.}\PY{n}{shuffle}\PY{p}{(}\PY{n}{textfiles}\PY{p}{)}
+             \PY{n}{textfiles} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{textfiles}\PY{p}{)}
+         
+             \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{n}{end\PYZus{}index} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{textfiles}\PY{p}{)}
+             
+             \PY{k}{while} \PY{k+kc}{True}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{i} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{end\PYZus{}index}\PY{p}{:}
+                     \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n}{textfile} \PY{o}{=} \PY{n}{textfiles}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+                 \PY{n}{gtbox}\PY{p}{,} \PY{n}{imgfile} \PY{o}{=} \PY{n}{readtxt}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{textdir}\PY{p}{,} \PY{n}{textfile}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{img} \PY{o}{=} \PY{n}{cv2}\PY{o}{.}\PY{n}{imread}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{imgdir}\PY{p}{,} \PY{n}{imgfile}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{h}\PY{p}{,} \PY{n}{w}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{img}\PY{o}{.}\PY{n}{shape}
+         
+                 \PY{c+c1}{\PYZsh{} 随机水平翻转}
+                 \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{50}\PY{p}{:}
+                     \PY{n}{img} \PY{o}{=} \PY{n}{img}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{p}{:}\PY{p}{]}
+                     \PY{n}{newx1} \PY{o}{=} \PY{n}{w} \PY{o}{\PYZhy{}} \PY{n}{gtbox}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}
+                     \PY{n}{newx2} \PY{o}{=} \PY{n}{w} \PY{o}{\PYZhy{}} \PY{n}{gtbox}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}
+                     \PY{n}{gtbox}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{newx1}
+                     \PY{n}{gtbox}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{newx2}
+         
+                 \PY{c+c1}{\PYZsh{} 把大框切成小框}
+                 \PY{n}{gtbox} \PY{o}{=} \PY{n}{split\PYZus{}gtboxes}\PY{p}{(}\PY{n}{gtbox}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} 计算出anchor标签}
+                 \PY{p}{[}\PY{n}{clas}\PY{p}{,} \PY{n}{regr}\PY{p}{]}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{cal\PYZus{}rpn}\PY{p}{(}\PY{p}{(}\PY{n}{h}\PY{p}{,} \PY{n}{w}\PY{p}{)}\PY{p}{,} \PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{h}\PY{o}{/}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{w}\PY{o}{/}\PY{l+m+mi}{16}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{n}{gtbox}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} 减去imagenet图像平均值，标准化图像}
+                 \PY{n}{m\PYZus{}img} \PY{o}{=} \PY{n}{img} \PY{o}{\PYZhy{}} \PY{n}{IMAGE\PYZus{}MEAN}
+                 \PY{n}{m\PYZus{}img} \PY{o}{=} \PY{n}{m\PYZus{}img}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}           \PY{c+c1}{\PYZsh{} shape=(1, h, w, c)}
+         
+                 \PY{n}{regr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{[}\PY{n}{clas}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{clas}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{regr}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{n}{clas} \PY{o}{=} \PY{n}{clas}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]} \PY{c+c1}{\PYZsh{} shape=(1, HW10, 1) [1, HW10, [class]]}
+                 \PY{n}{regr} \PY{o}{=} \PY{n}{regr}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}             \PY{c+c1}{\PYZsh{} shape=(1, HW10, 3) [1, HW10, [class, Vc, Vh]]}
+         
+                 \PY{k}{yield} \PY{n}{m\PYZus{}img}\PY{p}{,} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rpn\PYZus{}class\PYZus{}reshape}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{clas}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rpn\PYZus{}regress\PYZus{}reshape}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{regr}\PY{p}{\PYZcb{}}
+         
+                 \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+    \hypertarget{ux6587ux672cux7ebfux6784ux9020ux7b97ux6cd5ux5c0fux6846ux5408ux6210ux5927ux6846}{%
+\subsection{文本线构造算法------小框合成大框}\label{ux6587ux672cux7ebfux6784ux9020ux7b97ux6cd5ux5c0fux6846ux5408ux6210ux5927ux6846}}
+
+    预测出来的是许多挨着的小框，需要把这些小框合并为大框 1.
+计算每个框的伙伴框(也就是和当前框相邻的框) 2.
+构建当前框和伙伴框的关系图表 3. 通过关系图表合并小框到大框
+
+    \hypertarget{ux67e5ux627eux4f19ux4f34ux6846}{%
+\subsubsection{查找伙伴框}\label{ux67e5ux627eux4f19ux4f34ux6846}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  以当前i框为准，沿着x轴方向向后逐个像素查找k框\\
+\item
+  对比每个找到的k框，是否y方向上的交并比在阈值内
+\item
+  如果交并比在阈值内，k框就为i框的伙伴框
+\item
+  返回k框在所有anchor中的index
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{def} \PY{n+nf}{meet\PYZus{}v\PYZus{}iou}\PY{p}{(}\PY{n}{index1}\PY{p}{,} \PY{n}{index2}\PY{p}{,} \PY{n}{text\PYZus{}proposals}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    用于检测两个框的垂直方向上的相似和重叠情况}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{heights} \PY{o}{=} \PY{n}{text\PYZus{}proposals}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{text\PYZus{}proposals}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}
+         
+             \PY{k}{def} \PY{n+nf}{overlaps\PYZus{}vertical}\PY{p}{(}\PY{n}{index1}\PY{p}{,} \PY{n}{index2}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        求两个框垂直方向上的重叠率}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n}{h1} \PY{o}{=} \PY{n}{heights}\PY{p}{[}\PY{n}{index1}\PY{p}{]} \PY{c+c1}{\PYZsh{} 框1的高}
+                 \PY{n}{h2} \PY{o}{=} \PY{n}{heights}\PY{p}{[}\PY{n}{index2}\PY{p}{]} \PY{c+c1}{\PYZsh{} 框2的高}
+                 \PY{c+c1}{\PYZsh{} 两个框重叠处的y坐标}
+                 \PY{n}{y0} \PY{o}{=} \PY{n+nb}{max}\PY{p}{(}\PY{n}{text\PYZus{}proposals}\PY{p}{[}\PY{n}{index2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{text\PYZus{}proposals}\PY{p}{[}\PY{n}{index1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} 
+                 \PY{n}{y1} \PY{o}{=} \PY{n+nb}{min}\PY{p}{(}\PY{n}{text\PYZus{}proposals}\PY{p}{[}\PY{n}{index2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{text\PYZus{}proposals}\PY{p}{[}\PY{n}{index1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{return} \PY{n+nb}{max}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{y1} \PY{o}{\PYZhy{}} \PY{n}{y0}\PY{p}{)} \PY{o}{/} \PY{n+nb}{min}\PY{p}{(}\PY{n}{h1}\PY{p}{,} \PY{n}{h2}\PY{p}{)} \PY{c+c1}{\PYZsh{} 求重叠处的h处以两框中最短的h}
+         
+         
+             \PY{k}{def} \PY{n+nf}{size\PYZus{}similarity}\PY{p}{(}\PY{n}{index1}\PY{p}{,} \PY{n}{index2}\PY{p}{)}\PY{p}{:}
+                 \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{        求两个框高度相似度}
+         \PY{l+s+sd}{        \PYZdq{}\PYZdq{}\PYZdq{}}
+                 \PY{n}{h1} \PY{o}{=} \PY{n}{heights}\PY{p}{[}\PY{n}{index1}\PY{p}{]}
+                 \PY{n}{h2} \PY{o}{=} \PY{n}{heights}\PY{p}{[}\PY{n}{index2}\PY{p}{]}
+                 \PY{k}{return} \PY{n+nb}{min}\PY{p}{(}\PY{n}{h1}\PY{p}{,} \PY{n}{h2}\PY{p}{)} \PY{o}{/} \PY{n+nb}{max}\PY{p}{(}\PY{n}{h1}\PY{p}{,} \PY{n}{h2}\PY{p}{)}
+         
+             \PY{n}{v\PYZus{}iou} \PY{o}{=} \PY{n}{overlaps\PYZus{}vertical}\PY{p}{(}\PY{n}{index1}\PY{p}{,} \PY{n}{index2}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{MIN\PYZus{}V\PYZus{}OVERLAPS} \PY{o+ow}{and} \PYZbs{}
+                   \PY{n}{size\PYZus{}similarity}\PY{p}{(}\PY{n}{index1}\PY{p}{,} \PY{n}{index2}\PY{p}{)} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{MIN\PYZus{}SIZE\PYZus{}SIM}
+         
+             \PY{k}{return} \PY{n}{v\PYZus{}iou} \PY{c+c1}{\PYZsh{} bool类型}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}successions}\PY{p}{(}\PY{n}{index}\PY{p}{,} \PY{n}{text\PYZus{}proposals}\PY{p}{,} \PY{n}{boxes\PYZus{}table}\PY{p}{,} \PY{n}{imgsize}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    查找当前的框向后有没有连续的候选框}
+         \PY{l+s+sd}{    找当前框向后的伙伴框}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{w} \PY{o}{=} \PY{n}{imgsize}
+         
+             \PY{n}{box} \PY{o}{=} \PY{n}{text\PYZus{}proposals}\PY{p}{[}\PY{n}{index}\PY{p}{]} \PY{c+c1}{\PYZsh{} 获取当前框}
+             \PY{n}{results} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{} 这里是开始在当前box右边x坐标之后，在gap个像素之内查找有没有候选框}
+             \PY{k}{for} \PY{n}{right} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{box}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{box}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{n}{MAX\PYZus{}HORIZONTAL\PYZus{}GAP}\PY{p}{,} \PY{n}{w}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{r\PYZus{}box\PYZus{}indices} \PY{o}{=} \PY{n}{boxes\PYZus{}table}\PY{p}{[}\PY{n}{right}\PY{p}{]}
+                 \PY{k}{for} \PY{n}{r\PYZus{}box\PYZus{}index} \PY{o+ow}{in} \PY{n}{r\PYZus{}box\PYZus{}indices}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} 比较右边的框和当前的框垂直方向上的相似度}
+                     \PY{c+c1}{\PYZsh{} 这函数可以过滤掉x坐标相近但是y坐标相差很大的框，也就是跨行了}
+                     \PY{k}{if} \PY{n}{meet\PYZus{}v\PYZus{}iou}\PY{p}{(}\PY{n}{r\PYZus{}box\PYZus{}index}\PY{p}{,} \PY{n}{index}\PY{p}{,} \PY{n}{text\PYZus{}proposals}\PY{p}{)}\PY{p}{:} 
+                         \PY{n}{results}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{r\PYZus{}box\PYZus{}index}\PY{p}{)}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{results}\PY{p}{)} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{k}{return} \PY{n}{results}
+             \PY{k}{return} \PY{n}{results}
+\end{Verbatim}
+
+
+    \hypertarget{ux9a8cux8bc1ux4f19ux4f34ux6846}{%
+\subsubsection{验证伙伴框}\label{ux9a8cux8bc1ux4f19ux4f34ux6846}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  以当前k框为准，沿着x轴方向向前逐个像素查找i框\\
+\item
+  对比每个找到的i框，是否y方向上的交并比在阈值内
+\item
+  如果交并比在阈值内，i框就为k框的伙伴框
+\item
+  返回i框在所有anchor中的index
+\item
+  检查这里计算出的i框和之前选定的i框是否是同一个框
+\item
+  如果是同一个框那么可以确定i框和k框一定是伙伴框
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}successions}\PY{p}{(}\PY{n}{index}\PY{p}{,} \PY{n}{text\PYZus{}proposals}\PY{p}{,} \PY{n}{boxes\PYZus{}table}\PY{p}{,} \PY{n}{imgsize}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    查找当前的框向后有没有连续的候选框}
+         \PY{l+s+sd}{    找当前框向后的伙伴框}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{w} \PY{o}{=} \PY{n}{imgsize}
+         
+             \PY{n}{box} \PY{o}{=} \PY{n}{text\PYZus{}proposals}\PY{p}{[}\PY{n}{index}\PY{p}{]} \PY{c+c1}{\PYZsh{} 获取当前框}
+             \PY{n}{results} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{} 这里是开始在当前box右边x坐标之后，在gap个像素之内查找有没有候选框}
+             \PY{k}{for} \PY{n}{right} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{box}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{min}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{box}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{n}{MAX\PYZus{}HORIZONTAL\PYZus{}GAP}\PY{p}{,} \PY{n}{w}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{r\PYZus{}box\PYZus{}indices} \PY{o}{=} \PY{n}{boxes\PYZus{}table}\PY{p}{[}\PY{n}{right}\PY{p}{]}
+                 \PY{k}{for} \PY{n}{r\PYZus{}box\PYZus{}index} \PY{o+ow}{in} \PY{n}{r\PYZus{}box\PYZus{}indices}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} 比较右边的框和当前的框垂直方向上的相似度}
+                     \PY{c+c1}{\PYZsh{} 这函数可以过滤掉x坐标相近但是y坐标相差很大的框，也就是跨行了}
+                     \PY{k}{if} \PY{n}{meet\PYZus{}v\PYZus{}iou}\PY{p}{(}\PY{n}{r\PYZus{}box\PYZus{}index}\PY{p}{,} \PY{n}{index}\PY{p}{,} \PY{n}{text\PYZus{}proposals}\PY{p}{)}\PY{p}{:} 
+                         \PY{n}{results}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{r\PYZus{}box\PYZus{}index}\PY{p}{)}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{results}\PY{p}{)} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{k}{return} \PY{n}{results}
+             \PY{k}{return} \PY{n}{results}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{def} \PY{n+nf}{is\PYZus{}succession\PYZus{}node}\PY{p}{(}\PY{n}{index}\PY{p}{,} \PY{n}{successions\PYZus{}index}\PY{p}{,} \PY{n}{text\PYZus{}proposals}\PY{p}{,} \PY{n}{scores}\PY{p}{,} \PY{n}{boxes\PYZus{}table}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    这个函数是以之前向后找出的框为基准再向前找符合要求的框}
+         \PY{l+s+sd}{    如果这个框的score比当前框小，那么当前框和向后的框是一个最长连接}
+         \PY{l+s+sd}{    这个应该是以分数为界，切割出一个个连接}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{c+c1}{\PYZsh{} 以向前查找到的j\PYZus{}index的框向前查找，找到k\PYZus{}index的框}
+             \PY{n}{precursors} \PY{o}{=} \PY{n}{get\PYZus{}precursors}\PY{p}{(}\PY{n}{successions\PYZus{}index}\PY{p}{,} \PY{n}{text\PYZus{}proposals}\PY{p}{,} \PY{n}{boxes\PYZus{}table}\PY{p}{)} 
+             \PY{c+c1}{\PYZsh{} 如果scores\PYZus{}index \PYZgt{} scores\PYZus{}k\PYZus{}index那么这个序列是最长连接}
+             \PY{k}{if} \PY{n}{scores}\PY{p}{[}\PY{n}{index}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{scores}\PY{p}{[}\PY{n}{precursors}\PY{p}{]}\PY{p}{)}\PY{p}{:} 
+                 \PY{k}{return} \PY{k+kc}{True}
+             \PY{k}{return} \PY{k+kc}{False}
+\end{Verbatim}
+
+
+    \hypertarget{ux6784ux5efaux5f53ux524dux6846ux548cux4f19ux4f34ux6846ux7684ux5173ux7cfbux56feux8868}{%
+\subsubsection{构建当前框和伙伴框的关系图表}\label{ux6784ux5efaux5f53ux524dux6846ux548cux4f19ux4f34ux6846ux7684ux5173ux7cfbux56feux8868}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  所有小框的左边x坐标为关键字，在x轴上映射一个转换表，这个表可以用像素x坐标查找n个像素内的框
+\item
+  查找伙伴框
+\item
+  通过验证的伙伴框会映射到伙伴关系图表中
+\item
+  多次循环前面2步构建完整的伙伴关系表
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k}{def} \PY{n+nf}{build\PYZus{}graph}\PY{p}{(}\PY{n}{text\PYZus{}proposals}\PY{p}{,} \PY{n}{scores}\PY{p}{,} \PY{n}{imgsize}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    构建框的伙伴关系图表}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{w} \PY{o}{=} \PY{n}{imgsize}
+         
+             \PY{n}{boxes\PYZus{}table} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{p}{]} \PY{k}{for} \PY{n}{\PYZus{}} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{w}\PY{p}{)}\PY{p}{]}  \PY{c+c1}{\PYZsh{} 以x轴的顺序建立一个表}
+             \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{box} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{text\PYZus{}proposals}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{boxes\PYZus{}table}\PY{p}{[}\PY{n+nb}{int}\PY{p}{(}\PY{n}{box}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{index}\PY{p}{)}  \PY{c+c1}{\PYZsh{} 以小框左边x坐标，把小框映射到表中}
+             
+             \PY{c+c1}{\PYZsh{} 构造图表，形状为(N, N)第一维是当前框，第二维是伙伴框，伙伴框因该在当前框的右边}
+             \PY{n}{graph} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{text\PYZus{}proposals}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{text\PYZus{}proposals}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)} 
+             
+             \PY{k}{for} \PY{n}{index}\PY{p}{,} \PY{n}{box} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{text\PYZus{}proposals}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{successions} \PY{o}{=} \PY{n}{get\PYZus{}successions}\PY{p}{(}\PY{n}{index}\PY{p}{,} \PY{n}{text\PYZus{}proposals}\PY{p}{,} \PY{n}{boxes\PYZus{}table}\PY{p}{,} \PY{n}{imgsize}\PY{p}{)}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{successions}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{k}{continue}
+                 \PY{c+c1}{\PYZsh{} get\PYZus{}successions函数会找一组相邻的框，如果这一组有多个框这里选出的分最高的框}
+                 \PY{n}{successions\PYZus{}index} \PY{o}{=} \PY{n}{successions}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{scores}\PY{p}{[}\PY{n}{successions}\PY{p}{]}\PY{p}{)}\PY{p}{]} 
+                 \PY{k}{if} \PY{n}{is\PYZus{}succession\PYZus{}node}\PY{p}{(}\PY{n}{index}\PY{p}{,} \PY{n}{successions\PYZus{}index}\PY{p}{,} \PY{n}{text\PYZus{}proposals}\PY{p}{,} \PY{n}{scores}\PY{p}{,} \PY{n}{boxes\PYZus{}table}\PY{p}{)}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} 确定伙伴关系，当index和successions\PYZus{}index的两个框是伙伴时，图表的这个坐标设置为True}
+                     \PY{n}{graph}\PY{p}{[}\PY{n}{index}\PY{p}{,} \PY{n}{successions\PYZus{}index}\PY{p}{]} \PY{o}{=} \PY{k+kc}{True} 
+             \PY{k}{return} \PY{n}{graph}
+\end{Verbatim}
+
+
+    \hypertarget{ux901aux8fc7ux6846ux7684ux4f19ux4f34ux5173ux7cfbux56feux8868ux5408ux5e76ux5c0fux6846ux5230ux5927ux6846}{%
+\subsubsection{通过框的伙伴关系图表，合并小框到大框}\label{ux901aux8fc7ux6846ux7684ux4f19ux4f34ux5173ux7cfbux56feux8868ux5408ux5e76ux5c0fux6846ux5230ux5927ux6846}}
+
+    伙伴关系图表： 1. 假设一共有N个小框 2. 伙伴关系图表M的形状为(N, N)
+第一维是当前框的编号，第二维是伙伴框的编号 3.
+如果编号i的框有伙伴，那么M{[}i, :{]}有元素为True，
+那为True的位置就i框伙伴的编号 4. 如果编号k的框是其他框的伙伴，那么M{[}:,
+k{]}有元素为True，为True的位置编号的框的伙伴就是k框 5. 如果s号框 M{[}:,
+s{]} 没有元素为True 且 M{[}s, :{]}
+有元素为True，通过3、4点可以得出s号框不是任何框的伙伴，s号框有伙伴，所以s号框是一个大框的起始
+6. 如果e号框 M{[}:, e{]} 有元素为True 且 M{[}e, :{]}
+没有元素为True，依然通过3、4点可以得出e号框是其他框的伙伴，e号框没有伙伴，所以e号框是一个大框的结尾
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{k}{def} \PY{n+nf}{sub\PYZus{}graphs\PYZus{}connected}\PY{p}{(}\PY{n}{graph}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    通过框的伙伴关系图表，分出相连的框到一个列表中，这个列表中的小框是属于一个大框的}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{sub\PYZus{}graphs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{graph}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} not graph[:, index].any() 这个是找的successions\PYZus{}index的框，如果这个框对应的那一列下没有True，那么说明这个坐标之前没有框和它连续}
+                 \PY{c+c1}{\PYZsh{} graph[index, :].any() 找的是index的框，如果这个框对应的那一行下有True，那么说明这个坐标只有有和它连续的框}
+                 \PY{c+c1}{\PYZsh{} 因此可以断定这个框是一个起始框}
+                 \PY{k}{if} \PY{o+ow}{not} \PY{n}{graph}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{index}\PY{p}{]}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)} \PY{o+ow}{and} \PY{n}{graph}\PY{p}{[}\PY{n}{index}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} 没有框和index连续，index有连续的框}
+                     \PY{n}{v} \PY{o}{=} \PY{n}{index} \PY{c+c1}{\PYZsh{} 设置起始框的index}
+                     \PY{c+c1}{\PYZsh{} 构建子框的列表，列表里面是存放小框的序号，这些小框是属于一个大框的}
+                     \PY{n}{sub\PYZus{}graphs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{n}{v}\PY{p}{]}\PY{p}{)} 
+                     \PY{k}{while} \PY{n}{graph}\PY{p}{[}\PY{n}{v}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}\PY{p}{:} \PY{c+c1}{\PYZsh{} v框有伙伴时}
+                         \PY{c+c1}{\PYZsh{} np.where(graph[v, :])取出了那一行shape=(n,) }
+                         \PY{c+c1}{\PYZsh{} 这句代码其实取出的是当前行的横坐标，也就是v对应伙伴的index}
+                         \PY{n}{v} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{graph}\PY{p}{[}\PY{n}{v}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                         \PY{c+c1}{\PYZsh{} 把伙伴添加到当前子框列表中}
+                         \PY{n}{sub\PYZus{}graphs}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{v}\PY{p}{)}
+                         \PY{c+c1}{\PYZsh{} 不断的迭代查找v有没有伙伴，有伙伴就继续查找伙伴的伙伴}
+                         \PY{c+c1}{\PYZsh{} 这样最终找到所有连在一起的框}
+             \PY{k}{return} \PY{n}{sub\PYZus{}graphs} \PY{c+c1}{\PYZsh{} 返回的是嵌套列表，共两层}
+                               \PY{c+c1}{\PYZsh{} 外层是大框，内层是大框由那些小框组成}
+\end{Verbatim}
+
+
+    \hypertarget{ux6587ux672cux7ebfux6784ux9020ux7b97ux6cd5ux8ba1ux7b97ux5927ux6846ux7684ux56dbux4e2aux9876ux70b9}{%
+\subsection{文本线构造算法------计算大框的四个顶点}\label{ux6587ux672cux7ebfux6784ux9020ux7b97ux6cd5ux8ba1ux7b97ux5927ux6846ux7684ux56dbux4e2aux9876ux70b9}}
+
+    \begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  通过合并框算法，得到大框列表L，L中的元素是小框的编号
+\item
+  拟合L中所有小框的左上点和右下点为一条直线
+\item
+  通过直线方程求解左上右上、左下右下4个点的坐标，得到大框的坐标
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k}{def} \PY{n+nf}{fit\PYZus{}y}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    通过X和Y坐标集拟合一条直线}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{c+c1}{\PYZsh{} 这个句话翻译一下就是X中只有1个坐标，也就是X，Y点集只有一个点，这样就只能返回Y[0]坐标了}
+             \PY{k}{if} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{X} \PY{o}{==} \PY{n}{X}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{==} \PY{n+nb}{len}\PY{p}{(}\PY{n}{X}\PY{p}{)}\PY{p}{:} 
+                 \PY{k}{return} \PY{n}{Y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{Y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+             \PY{n}{line} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{poly1d}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{polyfit}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{Y}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} 通过X，Y拟合一个一次方程也就是一条直线}
+             
+             \PY{k}{return} \PY{n}{line}\PY{p}{(}\PY{n}{x1}\PY{p}{)}\PY{p}{,} \PY{n}{line}\PY{p}{(}\PY{n}{x2}\PY{p}{)} \PY{c+c1}{\PYZsh{} 返回x1,x2时这条直线上y坐标}
+         
+         
+         \PY{k}{def} \PY{n+nf}{threshold}\PY{p}{(}\PY{n}{coords}\PY{p}{,} \PY{n}{mini}\PY{p}{,} \PY{n}{maxi}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    把coords的大小压缩在mini和maxi之间}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{minimum}\PY{p}{(}\PY{n}{coords}\PY{p}{,} \PY{n}{maxi}\PY{p}{)}\PY{p}{,} \PY{n}{mini}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{clip\PYZus{}boxes}\PY{p}{(}\PY{n}{boxes}\PY{p}{,} \PY{n}{im\PYZus{}shape}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    Clip boxes to image boundaries.}
+         \PY{l+s+sd}{    剪切框，使框在图片中}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{boxes}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{threshold}\PY{p}{(}\PY{n}{boxes}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{im\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{boxes}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]} \PY{o}{=} \PY{n}{threshold}\PY{p}{(}\PY{n}{boxes}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{n}{im\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{return} \PY{n}{boxes}
+\end{Verbatim}
+
+
+    \hypertarget{ux6781ux5927ux503cux6291ux5236}{%
+\subsection{极大值抑制}\label{ux6781ux5927ux503cux6291ux5236}}
+
+    对于每个目标，预测出的框大多数情况有多个，极大值抑制就是在这些框中优选出最合适的框作为当前目标的预测框
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{k}{def} \PY{n+nf}{nms}\PY{p}{(}\PY{n}{dets}\PY{p}{,} \PY{n}{thresh}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    极大值抑制，过滤掉和最大值相近的框}
+         \PY{l+s+sd}{    这个算法是以每个框的得分从大到小来进行搜素需要被抑制的框}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{n}{x1} \PY{o}{=} \PY{n}{dets}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}
+             \PY{n}{y1} \PY{o}{=} \PY{n}{dets}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{x2} \PY{o}{=} \PY{n}{dets}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}
+             \PY{n}{y2} \PY{o}{=} \PY{n}{dets}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{]}
+             \PY{n}{scores} \PY{o}{=} \PY{n}{dets}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{]}
+         
+             \PY{n}{areas} \PY{o}{=} \PY{p}{(}\PY{n}{x2} \PY{o}{\PYZhy{}} \PY{n}{x1} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{n}{y2} \PY{o}{\PYZhy{}} \PY{n}{y1} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)} \PY{c+c1}{\PYZsh{} shape=(N,)}
+             \PY{n}{order} \PY{o}{=} \PY{n}{scores}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{c+c1}{\PYZsh{} 从大到小的排序，返回的是index}
+         
+             \PY{n}{keep} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{while} \PY{n}{order}\PY{o}{.}\PY{n}{size} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{i} \PY{o}{=} \PY{n}{order}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                 \PY{n}{keep}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{c+c1}{\PYZsh{} 找出得分最大值}
+                 \PY{c+c1}{\PYZsh{} 求解得分最大值和其他框的相交面积，求出交并比}
+                 \PY{n}{xx1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{x1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{x1}\PY{p}{[}\PY{n}{order}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} shape=(N\PYZhy{}1,) 在order[1:]上寻找}
+                 \PY{n}{yy1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{n}{y1}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{y1}\PY{p}{[}\PY{n}{order}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{xx2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{minimum}\PY{p}{(}\PY{n}{x2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{x2}\PY{p}{[}\PY{n}{order}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{yy2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{minimum}\PY{p}{(}\PY{n}{y2}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{y2}\PY{p}{[}\PY{n}{order}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{xx2} \PY{o}{\PYZhy{}} \PY{n}{xx1} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{h} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{maximum}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{yy2} \PY{o}{\PYZhy{}} \PY{n}{yy1} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{inter} \PY{o}{=} \PY{n}{w} \PY{o}{*} \PY{n}{h}
+                 \PY{n}{ovr} \PY{o}{=} \PY{n}{inter} \PY{o}{/} \PY{p}{(}\PY{n}{areas}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{areas}\PY{p}{[}\PY{n}{order}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{inter}\PY{p}{)} \PY{c+c1}{\PYZsh{} shape=(N\PYZhy{}1,)}
+                 
+                 \PY{c+c1}{\PYZsh{} shape=(N\PYZhy{}1)，找出低于阈值的框，因为高于阈值的框和当前得分最高的框重叠度很高}
+                 \PY{c+c1}{\PYZsh{} 留下交并比小于阈值的框，交并比大于阈值的框被抑制了}
+                 \PY{n}{inds} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{where}\PY{p}{(}\PY{n}{ovr} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{thresh}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} 
+                 \PY{c+c1}{\PYZsh{} 出开了第一个也就是得分最大的那个, 选出的order依然是按照有大到小的顺序排列}
+                 \PY{c+c1}{\PYZsh{} 继续从剩下的框中重复之前的计算，知道没有可用框}
+                 \PY{n}{order} \PY{o}{=} \PY{n}{order}\PY{p}{[}\PY{n}{inds} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]} 
+             
+             \PY{k}{return} \PY{n}{keep}
+\end{Verbatim}
+
+
+    \hypertarget{ux8badux7ec3ux4ee3ux7801ux793aux4f8b}{%
+\section{训练代码示例}\label{ux8badux7ec3ux4ee3ux7801ux793aux4f8b}}
+
+    \begin{Shaded}
+\begin{Highlighting}[]
+
+\ImportTok{from}\NormalTok{ dataloaders }\ImportTok{import}\NormalTok{ dataloader}
+\ImportTok{from}\NormalTok{ models }\ImportTok{import}\NormalTok{ cptn_base}
+\ImportTok{from}\NormalTok{ keras.optimizers }\ImportTok{import}\NormalTok{ Adam }
+\ImportTok{from}\NormalTok{ keras.callbacks }\ImportTok{import}\NormalTok{ ModelCheckpoint}
+\ImportTok{import}\NormalTok{ os}
+\ImportTok{import}\NormalTok{ tensorflow }\ImportTok{as}\NormalTok{ tf}
+\ImportTok{import}\NormalTok{ keras.backend.tensorflow_backend }\ImportTok{as}\NormalTok{ KTF}
+\NormalTok{os.environ[}\StringTok{"CUDA_VISIBLE_DEVICES"}\NormalTok{] }\OperatorTok{=} \StringTok{"0"}
+\ImportTok{from}\NormalTok{ keras.backend.tensorflow_backend }\ImportTok{import}\NormalTok{ set_session }
+\NormalTok{config }\OperatorTok{=}\NormalTok{ tf.ConfigProto() }
+\NormalTok{config.gpu_options.allow_growth}\OperatorTok{=}\VariableTok{True}
+\NormalTok{set_session(tf.Session(config}\OperatorTok{=}\NormalTok{config))}
+
+
+\NormalTok{textdir }\OperatorTok{=} \StringTok{'datasets/train_labels'}
+\NormalTok{imgdir  }\OperatorTok{=} \StringTok{'datasets/train_images'}
+
+\NormalTok{train_gen }\OperatorTok{=}\NormalTok{ dataloader.gen_sample(textdir, imgdir)}
+
+\NormalTok{model }\OperatorTok{=}\NormalTok{ cptn_base.cptn_model((}\VariableTok{None}\NormalTok{, }\VariableTok{None}\NormalTok{, }\DecValTok{3}\NormalTok{))}
+\NormalTok{model.}\BuiltInTok{compile}\NormalTok{(}
+\NormalTok{    optimizer}\OperatorTok{=}\NormalTok{Adam(}\FloatTok{1e-5}\NormalTok{),}
+\NormalTok{    loss}\OperatorTok{=}\NormalTok{\{}\StringTok{'rpn_class_reshape'}\NormalTok{: cptn_base.rpn_loss_clas, }\StringTok{'rpn_regress_reshape'}\NormalTok{: cptn_base.rpn_loss_regr\},}
+\NormalTok{    loss_weights}\OperatorTok{=}\NormalTok{\{}\StringTok{'rpn_class_reshape'}\NormalTok{: }\FloatTok{1.0}\NormalTok{, }\StringTok{'rpn_regress_reshape'}\NormalTok{: }\FloatTok{1.0}\NormalTok{\}}
+\NormalTok{)}
+
+\NormalTok{callbacks }\OperatorTok{=}\NormalTok{ [}
+\NormalTok{    ModelCheckpoint(}\VerbatimStringTok{r'weights/weights-ctpnlstm-}\SpecialCharTok{\{epoch:02d\}}\VerbatimStringTok{.hdf5'}\NormalTok{,}
+\NormalTok{                    save_weights_only}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\NormalTok{]}
+
+\NormalTok{model.fit_generator(}
+\NormalTok{    train_gen,}
+\NormalTok{    epochs}\OperatorTok{=}\DecValTok{20}\NormalTok{,}
+\NormalTok{    steps_per_epoch}\OperatorTok{=}\DecValTok{6000}\NormalTok{,}
+\NormalTok{    callbacks}\OperatorTok{=}\NormalTok{callbacks}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+    \hypertarget{ux9884ux6d4bux4ee3ux7801ux793aux4f8b}{%
+\section{预测代码示例}\label{ux9884ux6d4bux4ee3ux7801ux793aux4f8b}}
+
+    \begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ dataloaders }\ImportTok{import}\NormalTok{ dataloader}
+\ImportTok{from}\NormalTok{ models }\ImportTok{import}\NormalTok{ cptn_base}
+\ImportTok{from}\NormalTok{ keras.optimizers }\ImportTok{import}\NormalTok{ Adam }
+\ImportTok{from}\NormalTok{ keras.callbacks }\ImportTok{import}\NormalTok{ ModelCheckpoint}
+\ImportTok{from}\NormalTok{ keras }\ImportTok{import}\NormalTok{ layers}
+\ImportTok{from}\NormalTok{ keras.models }\ImportTok{import}\NormalTok{ Model}
+\ImportTok{import}\NormalTok{ os}
+\ImportTok{import}\NormalTok{ tensorflow }\ImportTok{as}\NormalTok{ tf}
+\ImportTok{import}\NormalTok{ cv2}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{from}\NormalTok{ dataloaders }\ImportTok{import}\NormalTok{ dataloader, text_line_bulder}
+\ImportTok{import}\NormalTok{ pickle}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\NormalTok{os.environ[}\StringTok{"CUDA_VISIBLE_DEVICES"}\NormalTok{] }\OperatorTok{=} \StringTok{"0"}
+
+
+\NormalTok{IMAGE_MEAN }\OperatorTok{=}\NormalTok{ [}\FloatTok{123.68}\NormalTok{,}\FloatTok{116.779}\NormalTok{,}\FloatTok{103.939}\NormalTok{]}
+
+
+\CommentTok{# 给训练网络加类别输出加一个激活函数，以便得到类别的评分}
+\NormalTok{model }\OperatorTok{=}\NormalTok{ cptn_base.cptn_model((}\VariableTok{None}\NormalTok{, }\VariableTok{None}\NormalTok{, }\DecValTok{3}\NormalTok{))}
+\NormalTok{clas, regr }\OperatorTok{=}\NormalTok{ model.output}
+\NormalTok{input_tensor }\OperatorTok{=}\NormalTok{ model.}\BuiltInTok{input}
+\NormalTok{clas_prod }\OperatorTok{=}\NormalTok{ layers.Activation(}\StringTok{'softmax'}\NormalTok{, name}\OperatorTok{=}\StringTok{'rpn_cls_softmax'}\NormalTok{)(clas)}
+
+\NormalTok{predict_model }\OperatorTok{=}\NormalTok{ Model(input_tensor, [clas, regr, clas_prod])}
+\NormalTok{predict_model.load_weights(}\StringTok{'weights/weights-ctpnlstm-20_20190412_0817.hdf5'}\NormalTok{)}
+
+\CommentTok{# test_img = cv2.imread('datasets/train_images/100.jpg')}
+\NormalTok{test_img }\OperatorTok{=}\NormalTok{ cv2.imread(}\StringTok{'/home/y/文档/神经网络数据集/Challenge2_Test_Task12_Images/img_14.jpg'}\NormalTok{)}
+\NormalTok{h, w, c }\OperatorTok{=}\NormalTok{ test_img.shape}
+\NormalTok{pred_img }\OperatorTok{=}\NormalTok{ test_img }\OperatorTok{-}\NormalTok{ IMAGE_MEAN}
+\NormalTok{pred_img }\OperatorTok{=}\NormalTok{ pred_img[np.newaxis, ...]}
+
+\CommentTok{# 预测}
+\NormalTok{clas, regr, clas_pord }\OperatorTok{=}\NormalTok{ predict_model.predict(pred_img)}
+
+\CommentTok{# 通过基本anchor和预测的regr还原预测的bbox}
+\NormalTok{anchor }\OperatorTok{=}\NormalTok{ dataloader.gen_anchor((}\BuiltInTok{int}\NormalTok{(h }\OperatorTok{/} \DecValTok{16}\NormalTok{), }\BuiltInTok{int}\NormalTok{(w }\OperatorTok{/} \DecValTok{16}\NormalTok{)), }\DecValTok{16}\NormalTok{)}
+\NormalTok{bbox }\OperatorTok{=}\NormalTok{ dataloader.bbox_transfrom_inv(anchor, regr)}
+\NormalTok{bbox }\OperatorTok{=}\NormalTok{ dataloader.clip_box(bbox, [h, w])}
+
+\CommentTok{# 选出类别评分大于0.7的框}
+\NormalTok{fg }\OperatorTok{=}\NormalTok{ np.where(clas_pord[}\DecValTok{0}\NormalTok{, :, }\DecValTok{1}\NormalTok{] }\OperatorTok{>} \FloatTok{0.7}\NormalTok{)[}\DecValTok{0}\NormalTok{]}
+\NormalTok{select_anchor }\OperatorTok{=}\NormalTok{ bbox[fg, :]}
+\NormalTok{select_score }\OperatorTok{=}\NormalTok{ clas_pord[}\DecValTok{0}\NormalTok{, fg, }\DecValTok{1}\NormalTok{]}
+\NormalTok{select_anchor }\OperatorTok{=}\NormalTok{ select_anchor.astype(}\StringTok{'int32'}\NormalTok{)}
+
+\CommentTok{# 过滤掉宽和高小于阈值的框}
+\NormalTok{keep_index }\OperatorTok{=}\NormalTok{ dataloader.filter_bbox(select_anchor, }\DecValTok{16}\NormalTok{)}
+\NormalTok{select_anchor }\OperatorTok{=}\NormalTok{ select_anchor[keep_index]}
+\NormalTok{select_score  }\OperatorTok{=}\NormalTok{ select_score[keep_index]}
+
+\CommentTok{# 极大值抑制}
+\NormalTok{select_score }\OperatorTok{=}\NormalTok{ np.reshape(select_score, (select_score.shape[}\DecValTok{0}\NormalTok{], }\DecValTok{1}\NormalTok{)) }\CommentTok{# shape=(N,) -> shape=(N, 1)}
+\NormalTok{nmsbox }\OperatorTok{=}\NormalTok{ np.hstack([select_anchor, select_score]) }\CommentTok{# shape=(N, 5) [N, [x1, y1, x2, y2, score]]}
+\NormalTok{keep }\OperatorTok{=}\NormalTok{ dataloader.nms(nmsbox, }\FloatTok{0.3}\NormalTok{) }\CommentTok{# 计算出留下的anchor的下标}
+\NormalTok{select_anchor }\OperatorTok{=}\NormalTok{ select_anchor[keep]}
+\NormalTok{select_score  }\OperatorTok{=}\NormalTok{ select_score[keep]}
+
+\CommentTok{# 使用文本线构造算法，把检测出的小框合并为大框}
+\NormalTok{text_recs }\OperatorTok{=}\NormalTok{ text_line_bulder.get_text_lines(select_anchor, select_score, (h, w))}
+\NormalTok{text_recs }\OperatorTok{=}\NormalTok{ text_recs.astype(}\StringTok{'int32'}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in}\NormalTok{ text_recs:}
+\NormalTok{    cv2.line(test_img, (i[}\DecValTok{0}\NormalTok{], i[}\DecValTok{1}\NormalTok{]), (i[}\DecValTok{2}\NormalTok{], i[}\DecValTok{3}\NormalTok{]), (}\DecValTok{255}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\DecValTok{2}\NormalTok{)}
+\NormalTok{    cv2.line(test_img, (i[}\DecValTok{0}\NormalTok{], i[}\DecValTok{1}\NormalTok{]), (i[}\DecValTok{4}\NormalTok{], i[}\DecValTok{5}\NormalTok{]), (}\DecValTok{255}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\DecValTok{2}\NormalTok{)}
+\NormalTok{    cv2.line(test_img, (i[}\DecValTok{6}\NormalTok{], i[}\DecValTok{7}\NormalTok{]), (i[}\DecValTok{2}\NormalTok{], i[}\DecValTok{3}\NormalTok{]), (}\DecValTok{255}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\DecValTok{2}\NormalTok{)}
+\NormalTok{    cv2.line(test_img, (i[}\DecValTok{4}\NormalTok{], i[}\DecValTok{5}\NormalTok{]), (i[}\DecValTok{6}\NormalTok{], i[}\DecValTok{7}\NormalTok{]), (}\DecValTok{255}\NormalTok{, }\DecValTok{0}\NormalTok{, }\DecValTok{0}\NormalTok{), }\DecValTok{2}\NormalTok{)}
+
+\CommentTok{# for i in select_anchor:}
+\CommentTok{#     cv2.rectangle(test_img, (i[0], i[1]), (i[2], i[3]), (0, 255, 0))}
+
+\NormalTok{plt.imshow(test_img[..., ::}\OperatorTok{-}\DecValTok{1}\NormalTok{])}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
